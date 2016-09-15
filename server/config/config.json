@@ -1,0 +1,9 @@
+{
+  "development": {
+    "database": "kambdademo",
+    "username": "tomascaslo",
+    "password": "password",
+    "dialect": "postgres"
+  },
+  "production": {}
+}

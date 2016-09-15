@@ -1,0 +1,33 @@
+
+html { 
+	overflow-y:scroll; 
+}
+
+body {
+	padding-top:50px; 
+}
+
+#todo-list { 
+	margin-bottom:30px; 
+}
+
+#todo-form { 
+	margin-bottom:50px; 
+}
+
+#task-input {
+  width: 100%;
+}
+
+input {
+	border: none;
+}
+
+.doneClass {
+	text-decoration: line-through;
+	color: red;
+}
+
+.notDoneClass {
+	color: green;
+}

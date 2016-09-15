@@ -1,0 +1,85 @@
+<section id = "secTodoApp">
+
+  <div class="container">
+
+    <div uib-alert ng-repeat="alert in alerts" class="alert-info" close="closeAlert($index)">{{ alert.message }}</div>
+
+    <div ng-if="isAuthenticated()">
+
+      <!-- Form to create Todo -->
+      <div id="todo-form" class="row">
+        <div class="col-sm-8 col-sm-offset-2 text-center">
+          <h2>Tasks</h2>
+
+          <form class="form-inline" name="fmCreateTodo" novalidate>
+
+            <div class="form-group col-sm-10">
+              <input type="text" id="task-input" class="form-control input-lg" placeholder="Enter a new task..." 
+              ng-model="formData.text" ng-required="true">
+            </div>
+
+            <!-- Form will be invalid unless the input box has content only then will the Button become active-->
+            <button type="submit" class="btn btn-primary btn-lg" ng-disabled="fmCreateTodo.$invalid" 
+              ng-click="createTodo()">Create</button>
+          </form> <!-- @END/ form -->
+
+        </div> <!-- @END/ .col -->
+      </div> <!-- @END/ #todo-form -->
+
+      <!-- List of Todo's -->
+      <div id="todo-list" class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+
+          <!-- Loop through todos in $scope.todos -->
+          <div class="checkbox" ng-repeat="todo in todos track by $index">
+
+            <!--[{{$index}}]	-->
+
+            <!--<input type="checkbox" ng-model="todo.done">-->
+            <input type="text" name="ibTodo" ng-model= "todo.text" value="{{todo.text}}" 
+            ng-class="{'doneClass': todo.done, 'notDoneClass': !todo.done }" class="col-sm-7"> 
+            <button type="button" class="btn btn-primary btn-xs" ng-model="todo.done" ng-click="todo.done = !todo.done" uib-button-checkbox>{{ getTodoStatus($index) }}</button>
+            <button class="btn btn-primary btn-xs" ng-click="editTodo(todo.id, todo.text, todo.done)">Update</button>
+            <button class="btn btn-danger btn-xs" ng-click="deleteTodo(todo.id)">Delete</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-danger btn-xs" ng-click="logout()">Logout</button>
+      </div>
+
+
+    </div> <!-- @END/ #auth-section -->
+
+    <div ng-if="!isAuthenticated()" class="col-sm-4 col-sm-offset-4">
+      <h3>Login</h3>
+      <form ng-submit="login()">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" ng-model="user.email" ng-required="true" class="form-control" id="loginEmail" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" ng-model="user.password" ng-required="true" class="form-control" id="loginPassword" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+      <h4 class="text-center text-muted">-- OR --</h4>
+      <h3>Sign up</h3>
+      <form ng-submit="createUser()">
+        <div class="form-group">
+          <label for="signupEmail">Email</label>
+          <input type="email" ng-model="userSignup.email" ng-required="true" class="form-control" id="signupEmail" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" ng-model="userSignup.password" ng-required="true" class="form-control" id="signupPassword" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-info">Submit</button>
+      </form>
+    </div>
+
+  </div> <!-- @END/ .container -->
+
+</section> <!-- @END/ section -->
